@@ -27,12 +27,12 @@ const memories = [
     title: "",
     text: " 😂",
     img: "/memories/memory-2.jpeg",
-    secret: ". Tum neech ho.",
+    secret: ". Tum tinku ho.",
   },
   {
     date: "THAT PHASE",
     title: "Uno partner",
-    text: "Lmabna paragraph likhna mere bass ki baat nahi hai🥴",
+    text: "Lamba paragraph likhna mere bass ki baat nahi hai🥴",
     img: "/memories/memory-3.jpeg",
     secret:
       "Official verdict: dono galat. Case closed. Ab koi appeal nahi.",
@@ -436,7 +436,7 @@ function App() {
             </p>
 
             <div className="love">
-              Neech GAUGI. ❤️
+              bauni GAUGI. ❤️
             </div>
 
             <button
