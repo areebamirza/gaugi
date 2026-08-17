@@ -261,21 +261,24 @@ main {
   max-width: 500px;
 }
 
-/* PHOTO CONTAINER */
+/* IMAGE CONTAINER */
 .memoryPhoto {
   min-height: 510px;
   height: 100%;
   position: relative;
   background: #eaded2;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* IMAGE */
+/* FULL IMAGE - NO CROPPING */
 .memoryPhoto img {
   width: 100%;
   height: 100%;
   min-height: 510px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
   filter: saturate(.9);
@@ -525,6 +528,7 @@ main {
   align-items: center;
 }
 
+/* MOBILE */
 @media (max-width: 720px) {
 
   header {
@@ -551,9 +555,9 @@ main {
 
   .memoryPhoto img {
     width: 100%;
-    height: 330px;
-    min-height: 330px;
-    object-fit: cover;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
     object-position: center;
   }
 
