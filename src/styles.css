@@ -4,8 +4,15 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
   background: #f8f3ed;
   color: #302b2a;
   font-family: "DM Sans", sans-serif;
@@ -14,7 +21,7 @@ body {
 .site {
   min-height: 100svh;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 10% 20%, #f6d8d5 0 10%, transparent 32%),
     radial-gradient(circle at 90% 80%, #e4d9c6 0 10%, transparent 30%),
@@ -142,11 +149,13 @@ header {
   padding: 14px 20px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   font-weight: 900;
   margin-top: 12px;
   transition: .2s;
   box-shadow: 0 12px 30px #3327241c;
+  white-space: nowrap;
 }
 
 .start:hover,
@@ -261,7 +270,11 @@ main {
   max-width: 500px;
 }
 
-/* IMAGE CONTAINER */
+
+/* =========================================
+   IMAGE CONTAINER
+========================================= */
+
 .memoryPhoto {
   min-height: 510px;
   height: 100%;
@@ -274,6 +287,7 @@ main {
 }
 
 /* FULL IMAGE - NO CROPPING */
+
 .memoryPhoto img {
   width: 100%;
   height: 100%;
@@ -318,6 +332,11 @@ main {
   align-items: center;
   gap: 5px;
 }
+
+
+/* =========================================
+   SECRET BUTTON
+========================================= */
 
 .secretBtn {
   margin-top: 12px;
@@ -376,13 +395,131 @@ main {
   margin-right: 7px;
 }
 
+
+/* =========================================
+   SORRY APPI BUTTON
+========================================= */
+
+.sorryBtn {
+  margin-top: 14px;
+  align-self: flex-start;
+  border: 1px solid #e2c7bd;
+  background: #fff7f1;
+  color: #95615d;
+  border-radius: 12px;
+  padding: 11px 15px;
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: .2s;
+}
+
+.sorryBtn:hover {
+  background: #f4dfd5;
+  transform: translateY(-2px);
+}
+
+.sorryJumping {
+  animation: sorryJump .7s ease;
+}
+
+@keyframes sorryJump {
+  20% {
+    transform: translateY(-9px) rotate(-2deg);
+  }
+
+  40% {
+    transform: translateY(3px) rotate(2deg);
+  }
+
+  60% {
+    transform: translateY(-6px);
+  }
+
+  80% {
+    transform: translateY(1px);
+  }
+}
+
+
+/* =========================================
+   NEXT BUTTON
+========================================= */
+
 .navButtons {
   margin-top: 25px;
+  min-height: 60px;
+  position: relative;
+  overflow: visible;
 }
 
 .next {
   font-size: 11px;
 }
+
+/*
+   Jab Sorry Appi nahi click hua:
+   React is button ko fixed position deta hai.
+   Isliye yahan width/height full rakhi gayi hai.
+*/
+
+.runawayNext {
+  position: fixed !important;
+
+  left: 50%;
+  top: 50%;
+
+  z-index: 9999;
+
+  margin: 0 !important;
+
+  min-width: 180px;
+  min-height: 48px;
+
+  padding: 14px 20px !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  /*
+     IMPORTANT:
+     React inline transform position control karega.
+  */
+
+  transition:
+    transform .35s ease,
+    left .35s ease,
+    top .35s ease;
+
+  transform-origin: center center;
+}
+
+.runawayNext span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.runawayNext svg {
+  flex: 0 0 auto;
+}
+
+.nextLocked {
+  opacity: .9;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   BOTTOM ROW
+========================================= */
 
 .bottomRow {
   display: flex;
@@ -403,6 +540,11 @@ main {
 .bottomRow button:hover {
   color: #82595a;
 }
+
+
+/* =========================================
+   DOTS
+========================================= */
 
 .dots {
   display: flex;
@@ -425,6 +567,11 @@ main {
   width: 19px;
   border-radius: 9px;
 }
+
+
+/* =========================================
+   CONFETTI
+========================================= */
 
 .confetti {
   position: fixed;
@@ -453,6 +600,11 @@ main {
     transform: scale(1.8) translateY(-60px);
   }
 }
+
+
+/* =========================================
+   MODAL
+========================================= */
 
 .modal {
   position: fixed;
@@ -528,7 +680,171 @@ main {
   align-items: center;
 }
 
-/* MOBILE */
+
+/* =========================================
+   DUDU BUBU ANIMATION
+========================================= */
+
+.duduBubu {
+  position: relative;
+  width: 100%;
+  height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.bear {
+  position: absolute;
+  z-index: 2;
+  font-size: 68px;
+  line-height: 1;
+  user-select: none;
+  will-change: transform;
+}
+
+.bearLeft {
+  left: 50%;
+  transform: translateX(-105px);
+  animation: duduMove 2s ease-in-out infinite;
+}
+
+.bearRight {
+  right: 50%;
+  transform: translateX(105px);
+  animation: bubuMove 2s ease-in-out infinite;
+}
+
+.kissHeart {
+  position: absolute;
+  z-index: 4;
+  font-size: 28px;
+  opacity: 0;
+  animation: duduKiss 2s ease-in-out infinite;
+}
+
+.floatingHearts {
+  position: absolute;
+  top: 10px;
+  z-index: 5;
+  font-size: 25px;
+  opacity: 0;
+  animation: floatingHeart 2s ease-in-out infinite;
+}
+
+.tinyHearts {
+  position: absolute;
+  top: 25px;
+  font-size: 13px;
+  letter-spacing: 8px;
+  opacity: 0;
+  animation: tinyHeartFloat 2s ease-in-out infinite;
+}
+
+
+/* LEFT BEAR */
+
+@keyframes duduMove {
+  0%,
+  100% {
+    transform: translateX(-105px) rotate(0deg);
+  }
+
+  42%,
+  60% {
+    transform: translateX(-32px) rotate(-5deg);
+  }
+}
+
+
+/* RIGHT BEAR */
+
+@keyframes bubuMove {
+  0%,
+  100% {
+    transform: translateX(105px) rotate(0deg);
+  }
+
+  42%,
+  60% {
+    transform: translateX(32px) rotate(5deg);
+  }
+}
+
+
+/* KISS */
+
+@keyframes duduKiss {
+  0%,
+  35% {
+    opacity: 0;
+    transform: scale(.4);
+  }
+
+  45%,
+  62% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(.7) translateY(-12px);
+  }
+}
+
+
+/* FLOATING HEART */
+
+@keyframes floatingHeart {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateY(15px) scale(.5);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  78%,
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(1.25);
+  }
+}
+
+
+/* SMALL HEARTS */
+
+@keyframes tinyHeartFloat {
+  0%,
+  40% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  55% {
+    opacity: .9;
+    transform: translateY(0);
+  }
+
+  85%,
+  100% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 720px) {
 
   header {
@@ -589,160 +905,57 @@ main {
   .letter h3 {
     font-size: 40px;
   }
-}
 
-/* SORRY APPI BUTTON */
-.sorryBtn {
-  margin-top: 14px;
-  align-self: flex-start;
-  border: 1px solid #e2c7bd;
-  background: #fff7f1;
-  color: #95615d;
-  border-radius: 12px;
-  padding: 11px 15px;
-  font-size: 10px;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  transition: .2s;
-}
 
-.sorryBtn:hover {
-  background: #f4dfd5;
-  transform: translateY(-2px);
-}
+  /* DUDU BUBU MOBILE */
 
-.sorryJumping {
-  animation: sorryJump .7s ease;
-}
-
-@keyframes sorryJump {
-  20% {
-    transform: translateY(-9px) rotate(-2deg);
+  .duduBubu {
+    height: 125px;
   }
 
-  40% {
-    transform: translateY(3px) rotate(2deg);
+  .bear {
+    font-size: 58px;
   }
 
-  60% {
-    transform: translateY(-6px);
+  .bearLeft {
+    transform: translateX(-85px);
   }
 
-  80% {
-    transform: translateY(1px);
-  }
-}
-
-/* NEXT BUTTON LOCKED */
-.nextLocked {
-  opacity: .45;
-  cursor: not-allowed;
-}
-
-/* CAT KISS */
-.catKiss {
-  position: relative;
-  height: 95px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  overflow: hidden;
-}
-
-.cat {
-  position: absolute;
-  font-size: 58px;
-  line-height: 1;
-}
-
-.catLeft {
-  transform: translateX(-45px);
-  animation: catLeftMove 1.8s ease-in-out infinite;
-}
-
-.catRight {
-  transform: translateX(45px) scaleX(-1);
-  animation: catRightMove 1.8s ease-in-out infinite;
-}
-
-.kiss {
-  position: absolute;
-  font-size: 28px;
-  opacity: 0;
-  animation: kissAnimation 1.8s ease-in-out infinite;
-  z-index: 3;
-}
-
-.hearts {
-  position: absolute;
-  top: 3px;
-  font-size: 18px;
-  opacity: 0;
-  animation: heartsAnimation 1.8s ease-in-out infinite;
-}
-
-@keyframes catLeftMove {
-  0%,
-  100% {
-    transform: translateX(-45px);
+  .bearRight {
+    transform: translateX(85px);
   }
 
-  45%,
-  55% {
-    transform: translateX(-13px);
-  }
-}
+  @keyframes duduMove {
+    0%,
+    100% {
+      transform: translateX(-85px);
+    }
 
-@keyframes catRightMove {
-  0%,
-  100% {
-    transform: translateX(45px) scaleX(-1);
-  }
-
-  45%,
-  55% {
-    transform: translateX(13px) scaleX(-1);
-  }
-}
-
-@keyframes kissAnimation {
-  0%,
-  35% {
-    opacity: 0;
-    transform: scale(.5);
+    42%,
+    60% {
+      transform: translateX(-27px) rotate(-5deg);
+    }
   }
 
-  45%,
-  60% {
-    opacity: 1;
-    transform: scale(1.15);
+  @keyframes bubuMove {
+    0%,
+    100% {
+      transform: translateX(85px);
+    }
+
+    42%,
+    60% {
+      transform: translateX(27px) rotate(5deg);
+    }
   }
 
-  70%,
-  100% {
-    opacity: 0;
-    transform: scale(.7) translateY(-5px);
-  }
-}
 
-@keyframes heartsAnimation {
-  0%,
-  45% {
-    opacity: 0;
-    transform: translateY(10px) scale(.5);
-  }
+  /* NEXT BUTTON MOBILE */
 
-  55% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  80%,
-  100% {
-    opacity: 0;
-    transform: translateY(-25px) scale(1.2);
+  .runawayNext {
+    min-width: 170px;
+    min-height: 48px;
+    padding: 13px 17px !important;
+    font-size: 11px;
   }
 }

@@ -93,7 +93,6 @@ function App() {
   const [sorryClicked, setSorryClicked] = useState(false);
   const [sorryJump, setSorryJump] = useState(false);
 
-  // Next button ki current position
   const [nextPosition, setNextPosition] = useState({
     x: 0,
     y: 0,
@@ -119,10 +118,7 @@ function App() {
     }, 1600);
   };
 
-  // NEXT BUTTON
   const next = () => {
-    // Sorry Appi nahi bola
-    // Next par click karne par hi button bhaagega
     if (!sorryClicked) {
       const buttonWidth = 180;
       const buttonHeight = 55;
@@ -149,7 +145,6 @@ function App() {
           randomX -
           window.innerWidth / 2 +
           buttonWidth / 2,
-
         y:
           randomY -
           window.innerHeight / 2 +
@@ -159,7 +154,6 @@ function App() {
       return;
     }
 
-    // Sorry Appi click ho chuka hai
     setSecret(false);
     setJump(false);
     setSorryClicked(false);
@@ -203,13 +197,11 @@ function App() {
     setSorryClicked(true);
     setSorryJump(false);
 
-    // Next ko center/normal position par lao
     setNextPosition({
       x: 0,
       y: 0,
     });
 
-    // Cute jump
     setJump(true);
 
     setTimeout(() => {
@@ -322,7 +314,6 @@ function App() {
               </div>
             )}
 
-            {/* SORRY APPI BUTTON */}
             <button
               className={
                 "sorryBtn " +
@@ -400,6 +391,7 @@ function App() {
       {showLetter && (
         <div className="modal">
           <div className="letter">
+
             <button
               className="close"
               onClick={() => setShowLetter(false)}
@@ -407,15 +399,29 @@ function App() {
               <X />
             </button>
 
-            {/* CAT KISS ANIMATION */}
-            <div className="catKiss">
-              <div className="cat catLeft">🐱</div>
+            {/* DUDU BUBU ANIMATION */}
+            <div className="duduBubu">
 
-              <div className="kiss">💋</div>
+              <div className="bear bearLeft">
+                🧸
+              </div>
 
-              <div className="cat catRight">🐱</div>
+              <div className="bear bearRight">
+                🧸
+              </div>
 
-              <div className="hearts">💕</div>
+              <div className="kissHeart">
+                💕
+              </div>
+
+              <div className="floatingHearts">
+                💗
+              </div>
+
+              <div className="tinyHearts">
+                ✨ 💕 ✨
+              </div>
+
             </div>
 
             <div className="mini">
@@ -447,6 +453,7 @@ function App() {
             >
               <RotateCcw size={15} /> ek baar phir se dekh leti hoon
             </button>
+
           </div>
         </div>
       )}
