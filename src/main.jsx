@@ -403,7 +403,7 @@ function App() {
             <div className="duduBubu">
 
               <div className="bear bearLeft">
-                🧸
+                🐱
               </div>
 
               <div className="bear bearRight">
