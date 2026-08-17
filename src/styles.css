@@ -590,3 +590,159 @@ main {
     font-size: 40px;
   }
 }
+
+/* SORRY APPI BUTTON */
+.sorryBtn {
+  margin-top: 14px;
+  align-self: flex-start;
+  border: 1px solid #e2c7bd;
+  background: #fff7f1;
+  color: #95615d;
+  border-radius: 12px;
+  padding: 11px 15px;
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: .2s;
+}
+
+.sorryBtn:hover {
+  background: #f4dfd5;
+  transform: translateY(-2px);
+}
+
+.sorryJumping {
+  animation: sorryJump .7s ease;
+}
+
+@keyframes sorryJump {
+  20% {
+    transform: translateY(-9px) rotate(-2deg);
+  }
+
+  40% {
+    transform: translateY(3px) rotate(2deg);
+  }
+
+  60% {
+    transform: translateY(-6px);
+  }
+
+  80% {
+    transform: translateY(1px);
+  }
+}
+
+/* NEXT BUTTON LOCKED */
+.nextLocked {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* CAT KISS */
+.catKiss {
+  position: relative;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.cat {
+  position: absolute;
+  font-size: 58px;
+  line-height: 1;
+}
+
+.catLeft {
+  transform: translateX(-45px);
+  animation: catLeftMove 1.8s ease-in-out infinite;
+}
+
+.catRight {
+  transform: translateX(45px) scaleX(-1);
+  animation: catRightMove 1.8s ease-in-out infinite;
+}
+
+.kiss {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0;
+  animation: kissAnimation 1.8s ease-in-out infinite;
+  z-index: 3;
+}
+
+.hearts {
+  position: absolute;
+  top: 3px;
+  font-size: 18px;
+  opacity: 0;
+  animation: heartsAnimation 1.8s ease-in-out infinite;
+}
+
+@keyframes catLeftMove {
+  0%,
+  100% {
+    transform: translateX(-45px);
+  }
+
+  45%,
+  55% {
+    transform: translateX(-13px);
+  }
+}
+
+@keyframes catRightMove {
+  0%,
+  100% {
+    transform: translateX(45px) scaleX(-1);
+  }
+
+  45%,
+  55% {
+    transform: translateX(13px) scaleX(-1);
+  }
+}
+
+@keyframes kissAnimation {
+  0%,
+  35% {
+    opacity: 0;
+    transform: scale(.5);
+  }
+
+  45%,
+  60% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(.7) translateY(-5px);
+  }
+}
+
+@keyframes heartsAnimation {
+  0%,
+  45% {
+    opacity: 0;
+    transform: translateY(10px) scale(.5);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(-25px) scale(1.2);
+  }
+}
