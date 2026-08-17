@@ -1,0 +1,17 @@
+GAUGI MEMORY WEBSITE
+
+Put the real photos in:
+public/memories/
+
+Rename them exactly:
+memory-1.jpg
+memory-2.jpg
+memory-3.jpg
+memory-4.jpg
+memory-5.jpg
+
+Then run:
+npm install
+npm run dev
+
+The site is intentionally written in casual Hinglish and uses a memory-archive / secret-diary style.
