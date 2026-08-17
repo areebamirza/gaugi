@@ -47,7 +47,8 @@ const memories = [
   {
     date: "TOP SECRET",
     title: "ja apne hostel",
-    text: "abki baar tum bhot tinki ho aur baat baat pe humse amma ki trh baat ki ho ye tinikna Purva ko ab ja ke dikhana. 😒❤️",
+    text:
+      "abki baar tum bhot tinki ho aur baat baat pe humse amma ki trh baat ki ho ye tinikna Purva ko ab ja ke dikhana. 😒❤️",
     img: "/memories/memory-5.jpeg",
     secret: "Chal nikal ab",
   },
@@ -92,7 +93,7 @@ function App() {
   const [sorryClicked, setSorryClicked] = useState(false);
   const [sorryJump, setSorryJump] = useState(false);
 
-  // Next button ki random position
+  // Next button ki current position
   const [nextPosition, setNextPosition] = useState({
     x: 0,
     y: 0,
@@ -109,45 +110,6 @@ function App() {
     }
   }, [page]);
 
-  // NEXT BUTTON KO SCREEN PAR BHAGAO
-  useEffect(() => {
-    if (page === -1 || sorryClicked) {
-      return;
-    }
-
-    const moveNextButton = () => {
-      const buttonWidth = 180;
-      const buttonHeight = 55;
-      const padding = 25;
-
-      const maxX =
-        window.innerWidth - buttonWidth - padding * 2;
-
-      const maxY =
-        window.innerHeight - buttonHeight - padding * 2;
-
-      const randomX =
-        Math.random() * Math.max(maxX, 0) + padding;
-
-      const randomY =
-        Math.random() * Math.max(maxY, 0) + padding;
-
-      // Center-based coordinates
-      setNextPosition({
-        x: randomX - window.innerWidth / 2 + buttonWidth / 2,
-        y: randomY - window.innerHeight / 2 + buttonHeight / 2,
-      });
-    };
-
-    // Pehli position immediately
-    moveNextButton();
-
-    // Har 650ms me bhaagega
-    const interval = setInterval(moveNextButton, 650);
-
-    return () => clearInterval(interval);
-  }, [sorryClicked, page]);
-
   const open = () => {
     setPage(0);
     setConfetti(true);
@@ -157,17 +119,51 @@ function App() {
     }, 1600);
   };
 
+  // NEXT BUTTON
   const next = () => {
-    // Sorry Appi ke bina Next nahi chalega
+    // Sorry Appi nahi bola
+    // Next par click karne par hi button bhaagega
     if (!sorryClicked) {
+      const buttonWidth = 180;
+      const buttonHeight = 55;
+      const padding = 25;
+
+      const maxX = Math.max(
+        window.innerWidth - buttonWidth - padding * 2,
+        0
+      );
+
+      const maxY = Math.max(
+        window.innerHeight - buttonHeight - padding * 2,
+        0
+      );
+
+      const randomX =
+        Math.random() * maxX + padding;
+
+      const randomY =
+        Math.random() * maxY + padding;
+
+      setNextPosition({
+        x:
+          randomX -
+          window.innerWidth / 2 +
+          buttonWidth / 2,
+
+        y:
+          randomY -
+          window.innerHeight / 2 +
+          buttonHeight / 2,
+      });
+
       return;
     }
 
+    // Sorry Appi click ho chuka hai
     setSecret(false);
     setJump(false);
     setSorryClicked(false);
 
-    // Position reset
     setNextPosition({
       x: 0,
       y: 0,
@@ -207,13 +203,13 @@ function App() {
     setSorryClicked(true);
     setSorryJump(false);
 
-    // Next ko wapas normal position par lao
+    // Next ko center/normal position par lao
     setNextPosition({
       x: 0,
       y: 0,
     });
 
-    // Ek baar cute jump
+    // Cute jump
     setJump(true);
 
     setTimeout(() => {
@@ -326,7 +322,7 @@ function App() {
               </div>
             )}
 
-            {/* SORRY APPI */}
+            {/* SORRY APPI BUTTON */}
             <button
               className={
                 "sorryBtn " +
@@ -339,23 +335,14 @@ function App() {
 
             <div className="navButtons">
               <button
-                className={
-                  "next runawayNext " +
-                  (!sorryClicked ? "nextLocked" : "")
-                }
+                className="next runawayNext"
                 onClick={next}
-                style={
-                  !sorryClicked
-                    ? {
-                        transform: `translate(
-                          calc(-50% + ${nextPosition.x}px),
-                          calc(-50% + ${nextPosition.y}px)
-                        )`,
-                      }
-                    : {
-                        transform: "translate(-50%, -50%)",
-                      }
-                }
+                style={{
+                  transform: `translate(
+                    calc(-50% + ${nextPosition.x}px),
+                    calc(-50% + ${nextPosition.y}px)
+                  )`,
+                }}
               >
                 <span>
                   {page === memories.length - 1
