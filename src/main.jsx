@@ -407,7 +407,7 @@ function App() {
               </div>
 
               <div className="bear bearRight">
-                🧸
+                🐱
               </div>
 
               <div className="kissHeart">
