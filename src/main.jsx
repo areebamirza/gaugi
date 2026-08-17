@@ -89,9 +89,14 @@ function App() {
   const [confetti, setConfetti] = useState(false);
   const [showLetter, setShowLetter] = useState(false);
 
-  // New states
   const [sorryClicked, setSorryClicked] = useState(false);
   const [sorryJump, setSorryJump] = useState(false);
+
+  // Next button ki random position
+  const [nextPosition, setNextPosition] = useState({
+    x: 0,
+    y: 0,
+  });
 
   const top = useRef(null);
 
@@ -104,6 +109,45 @@ function App() {
     }
   }, [page]);
 
+  // NEXT BUTTON KO SCREEN PAR BHAGAO
+  useEffect(() => {
+    if (page === -1 || sorryClicked) {
+      return;
+    }
+
+    const moveNextButton = () => {
+      const buttonWidth = 180;
+      const buttonHeight = 55;
+      const padding = 25;
+
+      const maxX =
+        window.innerWidth - buttonWidth - padding * 2;
+
+      const maxY =
+        window.innerHeight - buttonHeight - padding * 2;
+
+      const randomX =
+        Math.random() * Math.max(maxX, 0) + padding;
+
+      const randomY =
+        Math.random() * Math.max(maxY, 0) + padding;
+
+      // Center-based coordinates
+      setNextPosition({
+        x: randomX - window.innerWidth / 2 + buttonWidth / 2,
+        y: randomY - window.innerHeight / 2 + buttonHeight / 2,
+      });
+    };
+
+    // Pehli position immediately
+    moveNextButton();
+
+    // Har 650ms me bhaagega
+    const interval = setInterval(moveNextButton, 650);
+
+    return () => clearInterval(interval);
+  }, [sorryClicked, page]);
+
   const open = () => {
     setPage(0);
     setConfetti(true);
@@ -114,20 +158,20 @@ function App() {
   };
 
   const next = () => {
-    // Next tabhi chalega jab Sorry Appi click ho
+    // Sorry Appi ke bina Next nahi chalega
     if (!sorryClicked) {
-      setSorryJump(true);
-
-      setTimeout(() => {
-        setSorryJump(false);
-      }, 800);
-
       return;
     }
 
     setSecret(false);
     setJump(false);
     setSorryClicked(false);
+
+    // Position reset
+    setNextPosition({
+      x: 0,
+      y: 0,
+    });
 
     if (page < memories.length - 1) {
       setPage(page + 1);
@@ -140,6 +184,11 @@ function App() {
     setSecret(false);
     setJump(false);
     setSorryClicked(false);
+
+    setNextPosition({
+      x: 0,
+      y: 0,
+    });
 
     if (page > 0) {
       setPage(page - 1);
@@ -158,12 +207,18 @@ function App() {
     setSorryClicked(true);
     setSorryJump(false);
 
-    // Next button ko jump karwao
+    // Next ko wapas normal position par lao
+    setNextPosition({
+      x: 0,
+      y: 0,
+    });
+
+    // Ek baar cute jump
     setJump(true);
 
     setTimeout(() => {
       setJump(false);
-    }, 1000);
+    }, 700);
   };
 
   if (page === -1) {
@@ -193,7 +248,9 @@ function App() {
           </button>
         </div>
 
-        <footer>made by your slightly less irritating sister ♡</footer>
+        <footer>
+          made by your slightly less irritating sister ♡
+        </footer>
       </div>
     );
   }
@@ -205,7 +262,9 @@ function App() {
       <div className="grain" />
 
       {confetti && (
-        <div className="confetti">💗 ✨ 💕 🥹 ❤️ ✨ 💗</div>
+        <div className="confetti">
+          💗 ✨ 💕 🥹 ❤️ ✨ 💗
+        </div>
       )}
 
       <header>
@@ -267,10 +326,11 @@ function App() {
               </div>
             )}
 
-            {/* SORRY APPI BUTTON */}
+            {/* SORRY APPI */}
             <button
               className={
-                "sorryBtn " + (sorryJump ? "sorryJumping" : "")
+                "sorryBtn " +
+                (sorryJump ? "sorryJumping" : "")
               }
               onClick={handleSorry}
             >
@@ -280,11 +340,22 @@ function App() {
             <div className="navButtons">
               <button
                 className={
-                  "next " +
-                  (jump ? "jumping" : "") +
-                  (!sorryClicked ? " nextLocked" : "")
+                  "next runawayNext " +
+                  (!sorryClicked ? "nextLocked" : "")
                 }
                 onClick={next}
+                style={
+                  !sorryClicked
+                    ? {
+                        transform: `translate(
+                          calc(-50% + ${nextPosition.x}px),
+                          calc(-50% + ${nextPosition.y}px)
+                        )`,
+                      }
+                    : {
+                        transform: "translate(-50%, -50%)",
+                      }
+                }
               >
                 <span>
                   {page === memories.length - 1
@@ -323,6 +394,10 @@ function App() {
                 setPage(i);
                 setSorryClicked(false);
                 setSecret(false);
+                setNextPosition({
+                  x: 0,
+                  y: 0,
+                });
               }}
               aria-label={"Memory " + (i + 1)}
             />
@@ -353,9 +428,7 @@ function App() {
 
               <div className="cat catRight">🐱</div>
 
-              <div className="hearts">
-                💕
-              </div>
+              <div className="hearts">💕</div>
             </div>
 
             <div className="mini">
@@ -379,6 +452,10 @@ function App() {
                 setShowLetter(false);
                 setPage(-1);
                 setSorryClicked(false);
+                setNextPosition({
+                  x: 0,
+                  y: 0,
+                });
               }}
             >
               <RotateCcw size={15} /> ek baar phir se dekh leti hoon
